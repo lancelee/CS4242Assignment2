@@ -39,33 +39,33 @@ def main():
     print len(contents)
     for i in range(len(label_train)):
         text = process_line(contents[i])
-        if label_train[0] == 'apple':
-            if label_train[1] == 'positive':
+        if label_train[i][0] == 'apple':
+            if label_train[i][1] == 'positive':
                 app_train[0].append(text)
-            elif label_train[1] == 'negative':
+            elif label_train[i][1] == 'negative':
                 app_train[1].append(text)
-            elif label_train[1] == 'neutral':
+            elif label_train[i][1] == 'neutral':
                 app_train[2].append(text)    
-        elif label_train[0] == 'google':
-            if label_train[1] == 'positive':
+        elif label_train[i][0] == 'google':
+            if label_train[i][1] == 'positive':
                 goo_train[0].append(text)
-            elif label_train[1] == 'negative':
+            elif label_train[i][1] == 'negative':
                 goo_train[1].append(text)
-            elif label_train[1] == 'neutral':
+            elif label_train[i][1] == 'neutral':
                 goo_train[2].append(text)              
-        elif label_train[0] == 'microsoft':
-            if label_train[1] == 'positive':
+        elif label_train[i][0] == 'microsoft':
+            if label_train[i][1] == 'positive':
                 mic_train[0].append(text)
-            elif label_train[1] == 'negative':
+            elif label_train[i][1] == 'negative':
                 mic_train[1].append(text)
-            elif label_train[1] == 'neutral':
+            elif label_train[i][1] == 'neutral':
                 mic_train[2].append(text)  
-        elif label_train[0] == 'twitter':
-            if label_train[1] == 'positive':
+        elif label_train[i][0] == 'twitter':
+            if label_train[i][1] == 'positive':
                 twi_train[0].append(text)
-            elif label_train[1] == 'negative':
+            elif label_train[i][1] == 'negative':
                 twi_train[1].append(text)
-            elif label_train[1] == 'neutral':
+            elif label_train[i][1] == 'neutral':
                 twi_train[2].append(text)  
 
 def process_line(line):
