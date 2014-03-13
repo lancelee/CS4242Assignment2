@@ -5,6 +5,7 @@ import json
 import re
 from time import time
 import sys
+import nltk
 
 # import cld
 from sklearn.feature_extraction.text import CountVectorizer
@@ -29,6 +30,13 @@ def process_line(line):
     # text += ' &' + language
     return text
 
+def do_POS_tagging(list_of_words):
+    list_of_tuples = nltk.pos_tag(list_of_words)
+    for tuple in list_of_tuples: 
+        print tuple
+
+sentence = "You are a piece of me, someone I really need."
+do_POS_tagging(sentence.split())
 
 
 # labels for training classifier later
@@ -115,8 +123,8 @@ for i in range(len(contents[MICROSOFT_TEST:])):
     text = process_line(contents[MICROSOFT_TEST+i])
     tweets_test[3].append(text)    
 
-for i in range(len(tweets_test)):
-    print len(tweets_test[i])
+# for i in range(len(tweets_test)):
+#     print len(tweets_test[i])
 
 
 
