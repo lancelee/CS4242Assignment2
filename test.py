@@ -164,10 +164,9 @@ def sentiment_score(review):
 
 def process_line(line):
     # json_dict = json.loads(line)
-    try:
-        text =  json.loads(line)['text']
-    except:
-        return ""
+    line = unicode(line, 'iso-8859-1') # IMPT!! UnicodeDecodingError will appear if this is not here
+    text =  json.loads(line)['text']
+
     # remove numbers and lines
     text = ''.join(ch for ch in text if ch not in set(string.punctuation))
     return text.lower()

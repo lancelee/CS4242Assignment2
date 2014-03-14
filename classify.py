@@ -17,10 +17,12 @@ from sklearn.svm import LinearSVC
 
 def process_line(line):
     # json_dict = json.loads(line)
-    try:
-        text =  json.loads(line)['text']
-    except:
-        return ""
+    # try:
+    #     text = json.loads(line)['text']
+    # except:
+    #     return ""
+    line = unicode(line, 'iso-8859-1') # IMPT!! UnicodeDecodingError will appear if this is not here
+    text = json.loads(line)['text']
     # bonus = grab_info(json_dict)
     # if "retweeted_status" in json_dict:
     #     bonus2 = grab_info(json_dict["retweeted_status"])
@@ -28,15 +30,22 @@ def process_line(line):
 
     # text += bonus
     # text += ' &' + language
+    
+    # text = ''.join(ch for ch in text if ch not in set(string.punctuation))
+    # text = text.lower()
+    # list_of_words = text.split()
+    # list_of_tuples = do_POS_tagging(list_of_words)
+    # # only return words that are adjectives
+    # adjectives = []
+    # for tuple in list_of_tuples:
+    #     if tuple[1] == 'JJ' or tuple[1] == 'JJR' or tuple[1] == 'JJS':
+    #         adjectives.append(tuple[0])
+    # return ' '.join(adjectives)
     return text
 
 def do_POS_tagging(list_of_words):
     list_of_tuples = nltk.pos_tag(list_of_words)
-    for tuple in list_of_tuples: 
-        print tuple
-
-sentence = "You are a piece of me, someone I really need."
-do_POS_tagging(sentence.split())
+    return list_of_tuples  
 
 
 # labels for training classifier later
@@ -123,10 +132,6 @@ for i in range(len(contents[MICROSOFT_TEST:])):
     text = process_line(contents[MICROSOFT_TEST+i])
     tweets_test[3].append(text)    
 
-# for i in range(len(tweets_test)):
-#     print len(tweets_test[i])
-
-
 
 pipeline = Pipeline([
     ('vect', CountVectorizer(max_df=0.5, lowercase=False)),
@@ -188,8 +193,7 @@ if __name__ == "__main__":
         conf_matrix = metrics.confusion_matrix(label_test[i], predicted)
         print(conf_matrix)
 
-
-
+        
 
 
 
