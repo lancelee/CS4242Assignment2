@@ -11,35 +11,30 @@ import string
 def value_of(sentiment):
     if sentiment == 'positive': 
         return 1
+    elif sentiment == 'very positive':
+        return 3
     elif sentiment == 'negative': 
         return -1
+    elif sentiment == 'very negative':
+        return -3
     else: 
         return 0
-    return 0
 
-def sentence_score(sentence_tokens, previous_token, acum_score):    
-    if not sentence_tokens:
-        return acum_score
-    else:
-        current_token = sentence_tokens[0]
-        tag = current_token[1]
-        token_score = value_of(tag)
-        if previous_token is not None:
-            previous_tag = previous_token[1]
-            if 'inc' in previous_tag:
-                token_score *= 2.0
-            elif 'dec' in previous_tag:
-                token_score /= 2.0
-            elif 'inv' in previous_tag:
-                token_score *= -1.0
-        return sentence_score(sentence_tokens[1:], current_token, acum_score + token_score)
-
-def sentiment_score(review):
-    total_score = sentence_score(review, None, 0.0)
+def sentiment_score(list_of_tuples):
+    total_score = 0
+    
+    for tuple in list_of_tuples:
+        total_score += value_of(tuple[1])
     # normalize the scores
-    if len(review) != 0:
-        total_score /= len(review)
     return total_score 
+
+def get_sentiment(score):
+    if score < -3:
+        return 'negative'
+    elif score > 3:
+        return 'positive'
+    else:
+        return 'neutral'
 
 def process_line(line):
     # json_dict = json.loads(line)
@@ -72,7 +67,6 @@ if __name__ == "__main__":
 			name, polarity = wpolarity.split("=")
 			if strength == 'strongsubj':
 				polarity = "very " + polarity
-			print word + ": " + polarity
 			# add to dictionary
 			dictionary[word] = polarity
 
@@ -116,26 +110,32 @@ if __name__ == "__main__":
         text = process_line(contents[MICROSOFT_TEST+i])
         tweets_test[3].append(text)    
 
-    
-    print dictionary.items()
+    for i in range(len(orgs)):	
+    	print("analyzing sentiment...")
 
-    # for i in range(len(orgs)):	
-    # 	print("analyzing sentiment...")
-
-        # # using the sentiment lexicons to evaluate the test data
-        # scores = []
-        # for j in range(len(tweets_test[i])):
-        #     list_of_words = splitter.split(tweets_test[i][j])
-        #     pos_tagged_words = postagger.pos_tag(list_of_words)
-        #     dict_tagged_words = dicttagger.tag(pos_tagged_words)
-        #     score = sentiment_score(dict_tagged_words)
-        #     print score
-        #     scores.append(score)
+        # using the sentiment lexicons to evaluate the test data
+        scores = []
+        for j in range(len(tweets_test[i])):
+            # split texts into words
+            list_of_words = tweets_test[i][j].split()
+            # tag them with POS tags
+            pos_tagged_words = nltk.pos_tag(list_of_words)
+            # tag them with words if found in the dictionary
+            dict_tagged_words = []
+            for tuple in pos_tagged_words:
+                if tuple[0] in dictionary:
+                    word, tag = tuple
+                    tuple = (word, dictionary[word]) 
+                    dict_tagged_words.append(tuple)                    
+            # count the score from the list of words
+            score = sentiment_score(dict_tagged_words)
+            print score
+            scores.append(score)
     
-        # # matching test results with the groundtruths
-        # count = 0    
-        # for j in range(len(scores)):
-        #     if get_sentiment(scores[j]) == label_test[i][j]:
-        #         count += 1
-        # accuracy = count / (len(scores) + 0.)
-        # print "Accuracy for " + orgs[i] + ": " + str(accuracy)         
+        # matching test results with the groundtruths
+        count = 0    
+        for j in range(len(scores)):
+            if get_sentiment(scores[j]) == label_test[i][j]:
+                count += 1
+        accuracy = count / (len(scores) + 0.)
+        print "Accuracy for " + orgs[i] + ": " + str(accuracy)         
