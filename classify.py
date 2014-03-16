@@ -15,6 +15,14 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 
+
+# loading stopwords
+stopwordlist = []
+with open('stopwordlist.txt') as f:
+    contents = f.readlines()
+    for word in contents:
+        stopwordlist.append(word.rstrip())
+
 regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
 with open('positive_word.txt') as file: positive_words = set([word.rstrip() for word in file])
 with open('negative_word.txt') as file: negative_words = set([word.rstrip() for word in file])
@@ -160,7 +168,7 @@ for i in range(len(contents[MICROSOFT_TEST:])):
 
 
 pipeline = Pipeline([
-    ('vect', CountVectorizer(max_df=0.5, lowercase=False)),
+    ('vect', CountVectorizer(max_df=0.5, lowercase=False, stop_words=stopwordlist)),
     ('tfidf', TfidfTransformer()),
     ('clf', LinearSVC()),
 ])
@@ -220,6 +228,16 @@ def main():
         print(metrics.classification_report(label_test[i], predicted[i]))
         conf_matrix = metrics.confusion_matrix(label_test[i], predicted[i])
         print(conf_matrix)
+
+    # print out the accuracy
+    count = 0
+    for i in range(len(orgs)):
+        for j in range(len(predicted[i])):
+            if predicted[i][j] == label_test[i][j]:
+                count += 1
+    accuracy = count / 928.0
+    print accuracy
+
 
 if __name__ == "__main__":
     main()
