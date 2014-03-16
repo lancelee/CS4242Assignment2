@@ -229,6 +229,24 @@ if __name__ == "__main__":
     splitter = Splitter()
     postagger = POSTagger()
     
+    # write to file the positive and negative texts for analysis
+    positive_output = open("positive.txt", "wb")
+    negative_output = open("negative.txt", "wb")
+    neutral_output = open("neutral.txt", "wb")
+
+    for i in range(len(tweets_train)):
+        for j in range(len(tweets_train[i])):
+            if label_train[i][j] == 'positive':
+                positive_output.write(tweets_train[i][j].encode('utf8') + '\n')
+            elif label_train[i][j] == 'negative':
+                negative_output.write(tweets_train[i][j].encode('utf8') + '\n')
+            else:    
+                neutral_output.write(tweets_train[i][j].encode('utf8') + '\n')
+
+    positive_output.close()
+    negative_output.close()
+    neutral_output.close()
+
 
     # train the sentiment lexicon for all organizations
     for i in range(len(orgs)):
