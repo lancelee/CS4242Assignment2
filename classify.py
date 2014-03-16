@@ -44,7 +44,7 @@ with open('dicts/sentiment_lexicon.tff') as file:
         if strength == 'strongsubj':
             polarity = "very " + polarity
         # add to dictionary
-        dictionary[word] = polarity
+        dictionary[stemmer(word)] = polarity
 
 
 def process_line(line):
@@ -61,34 +61,62 @@ def process_line(line):
     text = text.lower()
     tokens = [stemmer(word) for word in regex_tok.tokenize(text)]
     #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", nltk.pos_tag(tokens))]
-    
+
     global dictionary
+    
+    to_negate = False   
     for word in tokens:
+    #     # handling negations        
+    #     if word == 'but':
+    #         if tokens[-1] == "@NEG" or tokens[-1] == "@POS": 
+    #             tokens.pop()  # pop out the last sentiment tag if it's positve or negative
+    #     if word == 'not':
+    #         to_negate = True
+
+        # # using Bing Liu's lexicon    
         # if (word in positive_words): tokens.append("@POS")
-        # if (word in negative_words): tokens.append("@NEG")        
+        # if (word in negative_words): tokens.append("@NEG")
+
+        # using MPQA lexicon
         if word in dictionary:
             if dictionary[word] == 'positive':
-                tokens.append("@POS")
-            # elif dictionary[word] == 'very positive':
-            #     tokens.append("@POS")
-            #     tokens.append("@POS")
+                if to_negate == True:
+                    tokens.append("@NEG")
+                    to_negate = False
+                else:
+                    tokens.append("@POS")
+            elif dictionary[word] == 'very positive':
+                if to_negate == True:
+                    tokens.append("@NEG")
+                    tokens.append("@NEG")
+                    to_negate = False
+                else:
+                    tokens.append("@POS")
+                    tokens.append("@POS")
             elif dictionary[word] == 'negative':
-                tokens.append("@NEG")
-            # elif dictionary[word] == 'very negative':
-            #     tokens.append("@NEG")
-            #     tokens.append("@NEG")
+                if to_negate == True:
+                    tokens.append("@POS")
+                    to_negate = False
+                else:
+                    tokens.append("@NEG")
+            elif dictionary[word] == 'very negative':
+                if to_negate == True:
+                    tokens.append("@POS")
+                    tokens.append("@POS")
+                    to_negate = False
+                else:
+                    tokens.append("@NEG")
+                    tokens.append("@NEG")
             elif dictionary[word] == 'neutral':
+                if to_negate == True:
+                    to_negate = False
                 tokens.append("@NEU")
-            # elif dictionary[word] == 'very neutral':    
-            #     tokens.append("@NEU")
-            #     tokens.append("@NEU")
+            elif dictionary[word] == 'very neutral':    
+                if to_negate == True:
+                    to_negate = False
+                tokens.append("@NEU")
+                tokens.append("@NEU")
     
-    for i, word in enumerate(tokens):
-        if (i == len(tokens) - 1) : break
-        next_word = tokens[i+1]
-
-        if (word == "n't" or word == "not"):
-            tokens[i+1] = "NOT_"+next_word
 
     text = " ".join(tokens)
 
@@ -208,7 +236,7 @@ for i in range(len(contents[MICROSOFT_TEST:])):
 
 
 pipeline = Pipeline([
-    ('vect', CountVectorizer(max_df=0.5, lowercase=False, stop_words=stopwordlist)),
+    ('vect', CountVectorizer(max_df=0.5, lowercase=False)),
     ('tfidf', TfidfTransformer()),
     ('clf', LinearSVC()),
 ])

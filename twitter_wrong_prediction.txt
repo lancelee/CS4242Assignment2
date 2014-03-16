@@ -1,74 +1,72 @@
 "fuck facebook twitter is way better teamfollowback followm @POS" classified as neutral but should be positive
 
-"haven t been on thi twitter shit in a while man here becaus look like aboutthatlif be haven hella fun on twitter @NEU" classified as neutral but should be positive
+"haven t been on thi twitter shit in a while man here becaus look like aboutthatlif be haven hella fun on twitter @POS @POS @NEU @POS @POS @POS @POS @POS @POS" classified as neutral but should be positive
 
 "twitter just help me find the song from the end of a tv show i just watch twitter gt @POS @POS @NEU @POS" classified as neutral but should be positive
 
-"rt drewbezanson you can liter go back and forth between facebook twitter text and email all do technolog is too good @POS @NEG @POS" classified as neutral but should be positive
+"rt drewbezanson you can liter go back and forth between facebook twitter text and email all do technolog is too good @POS @POS @NEG @POS @POS" classified as neutral but should be positive
 
-"tas82011 thnx isn t twitter pretti damn amaz hope yr enjoy it fast like you and i @POS @NEU" classified as neutral but should be positive
+"tas82011 thnx isn t twitter pretti damn amaz hope yr enjoy it fast like you and i @POS @POS @NEG @NEG @POS @POS @POS @POS @POS @POS @NEU @POS @POS" classified as neutral but should be positive
 
-"dear twitter i have miss you promis i ll keep in touch more often @NEG @NEU" classified as neutral but should be positive
+"dear twitter i have miss you promis i ll keep in touch more often @POS @POS @NEG @POS @POS @NEU @NEU" classified as neutral but should be positive
 
-"rt derryxown i like twitter" classified as neutral but should be positive
+"rt derryxown i like twitter @POS @POS" classified as neutral but should be positive
 
 "but fb still suck amp twitter beat it anyday @NEU" classified as neutral but should be positive
 
-"i love twitter twitterswag" classified as neutral but should be positive
+"i like twitter @POS @POS" classified as neutral but should be positive
 
-"i like twitter" classified as neutral but should be positive
+"thi twitter shit is funni and entertain i haven t did shit all day but my finger are hurt twitter @POS @POS @POS @POS @POS @POS @NEG" classified as neutral but should be positive
 
-"thi twitter shit is funni and entertain i haven t did shit all day but my finger are hurt twitter @POS @NEG" classified as neutral but should be positive
+"rt treyhob21 twitter give everyon that voic that they believ should be heard by peopl unlik real life lol @NEU @NEU @NEU @NEG @POS" classified as neutral but should be positive
 
-"rt treyhob21 twitter give everyon that voic that they believ should be heard by peopl unlik real life lol @NEU @POS" classified as neutral but should be positive
+"kyliemessi yeahh you did it wa about time caught the twitter bug and now i m hook @POS @NEG" classified as neutral but should be positive
 
-"kyliemessi yeahh you did it wa about time caught the twitter bug and now i m hook @NEG" classified as neutral but should be positive
+"science_alex hashtag are use here twitter gt facebook @POS" classified as neutral but should be positive
 
-"i keep forgettin how much i realli like twitter lol @NEU" classified as neutral but should be positive
+"i keep forgettin how much i realli like twitter lol @NEU @NEU @NEU @POS @POS" classified as neutral but should be positive
 
 "twitter" classified as neutral but should be positive
 
-"for some reason twitter isnt allow me to see my tweet that got retweet @POS @POS" classified as neutral but should be negative
+"good lord twitter send my bloodi tweet ihateyourightnow @POS @POS @NEG" classified as neutral but should be negative
 
-"good lord twitter send my bloodi tweet ihateyourightnow @POS" classified as neutral but should be negative
+"so im about to make anoth twitter account sinc thi one fuck up @NEU @NEG" classified as neutral but should be negative
 
-"so im about to make anoth twitter account sinc thi one fuck up @NEU" classified as neutral but should be negative
+"my dm s come in so fuck late damn twitter @POS @POS @NEU @NEG @NEG" classified as neutral but should be negative
 
-"my dm s come in so fuck late damn twitter @NEU" classified as neutral but should be negative
+"dear twitter twitter fix your shit we cant see our retweet or mention @POS @POS" classified as neutral but should be negative
+
+"twitter got dead as fuck all of a sudden @NEG" classified as neutral but should be negative
 
 "my twitter act funnyyyyyyi" classified as neutral but should be negative
 
 "the first thing i do when i get home is either get on facebook or twitter what is wrong with me @NEG" classified as neutral but should be negative
 
-"still not NOT_quit sure how to use thi what the point of it is twitter idontunderstand @NEU @NEG @NEU" classified as neutral but should be negative
+"still not quit sure how to use thi what the point of it is twitter idontunderstand @NEU @NEU @NEU @POS @POS @POS @NEU" classified as neutral but should be negative
 
-"twitter whi must you be so difficult @NEU @NEG" classified as neutral but should be negative
+"twitter whi must you be so difficult @NEU @NEU @NEU @NEG" classified as neutral but should be negative
 
-"thank you twitter for not NOT_give me the 10 tweet that have been tweet at me in the past 3 day lol blameitontheiphon ineedtoupd" classified as neutral but should be negative
+"thank you twitter for not give me the 10 tweet that have been tweet at me in the past 3 day lol blameitontheiphon ineedtoupd @POS @POS" classified as neutral but should be negative
 
-"twitter is mess up follow keep switch to same number ___ fixit" classified as neutral but should be negative
+"twitter is mess up follow keep switch to same number ___ fixit @NEG @NEG" classified as neutral but should be negative
 
-"i need to get off twitter" classified as neutral but should be negative
+"i need to get off twitter @NEU" classified as neutral but should be negative
 
 "twitter timelin and mention up the shit" classified as neutral but should be negative
 
-"so much garbag twitter @NEU @NEU" classified as neutral but should be negative
+"so much garbag twitter @NEU @NEU @NEG" classified as neutral but should be negative
 
-"who the hell use twitter on a tv man panason epicfail" classified as neutral but should be negative
+"who the hell use twitter on a tv man panason epicfail @NEG @NEG @POS" classified as neutral but should be negative
 
-"be abl to share our thought with the world is awesom gt gt hooray for twitter @NEU" classified as positive but should be neutral
+"be abl to share our thought with the world is awesom gt gt hooray for twitter @POS @POS @POS @POS @POS" classified as positive but should be neutral
 
-"who will be our twitter winner 4 daytimewdonna giveaway for 100 thi fri tweet about our show our guest whi you love us use dwd100 @NEU" classified as positive but should be neutral
+"man i love twitter @POS @POS" classified as positive but should be neutral
 
-"man i love twitter" classified as positive but should be neutral
-
-"i hate when my phne do what it want on twitter" classified as negative but should be neutral
+"jennyorwuuut i wishh twitter would tell me who retweet my stuff it doe @NEU" classified as negative but should be neutral
 
 "rt jennyorwuuut i wishh twitter would tell me who retweet my stuff @NEU" classified as negative but should be neutral
 
 "i wishh twitter would tell me who retweet my stuff @NEU" classified as negative but should be neutral
 
-"igohard_nobon yooooo mena malia lol i love your twitter name" classified as positive but should be neutral
-
-"i love my twitter name" classified as positive but should be neutral
+"i love my twitter name @POS @POS" classified as positive but should be neutral
 

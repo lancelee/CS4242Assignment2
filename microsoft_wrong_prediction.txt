@@ -1,122 +1,126 @@
-"i becam a citizenship member at microsoft thank god mspegypt microsoft" classified as neutral but should be positive
+"i becam a citizenship member at microsoft thank god mspegypt microsoft @POS @POS" classified as neutral but should be positive
 
 "blog post cool tool microsoft mous without border http t co um860jfh tool util microsoft" classified as neutral but should be positive
 
-"forget siri there is still no beat speech command on windowsphon http t co 19gajsgi wp7 mango tellm microsoft siri @NEU" classified as neutral but should be positive
+"forget siri there is still no beat speech command on windowsphon http t co 19gajsgi wp7 mango tellm microsoft siri @NEG @NEG @NEU" classified as neutral but should be positive
 
-"microsoft test and prove appsens enterpris scalabl 78k user on one person db http t co xtzmpsmt enterpris @NEU" classified as neutral but should be positive
+"microsoft test and prove appsens enterpris scalabl 78k user on one person db http t co xtzmpsmt enterpris @NEU @POS @POS @POS @POS" classified as neutral but should be positive
 
-"rad_softwar ye good point about erp but unfair assess in say sage sap and microsoft dynam are not NOT_deliv @POS @NEU" classified as neutral but should be positive
+"rad_softwar ye good point about erp but unfair assess in say sage sap and microsoft dynam are not deliv @POS @POS @POS @POS @NEU @NEG @NEG @NEU @POS @POS @NEG @NEG @POS" classified as neutral but should be positive
 
-"good dev opportun at microsoft ux tour helsinki finland http t co hckjxz4k @POS" classified as neutral but should be positive
+"good dev opportun at microsoft ux tour helsinki finland http t co hckjxz4k @POS @POS @POS @POS" classified as neutral but should be positive
 
-"edbott you have sugar coat the fsf secur boot reaction thi is blatant anti microsoft propaganda @NEU" classified as neutral but should be positive
+"edbott you have sugar coat the fsf secur boot reaction thi is blatant anti microsoft propaganda @POS @NEU @NEG @NEG @NEG @NEG" classified as negative but should be positive
 
-"v impress w imag composit editor from msftresearch for creat panorama from individu imag http t co so7w7spn tx microsoft @POS" classified as neutral but should be positive
+"v impress w imag composit editor from msftresearch for creat panorama from individu imag http t co so7w7spn tx microsoft @POS @POS @POS" classified as neutral but should be positive
 
-"rt fran_mac_ i have been blown away by technolog innov microsoft should do more market @NEU" classified as neutral but should be positive
+"rt fran_mac_ i have been blown away by technolog innov microsoft should do more market @POS @NEU" classified as neutral but should be positive
 
-"i have been blown away by technolog innov microsoft should do more market @NEU" classified as neutral but should be positive
+"i have been blown away by technolog innov microsoft should do more market @POS @NEU" classified as neutral but should be positive
 
-"rt ashercfo yahoo up 4 sale again yr back microsoft almost bought it now glad it didn t thi could b deal of the year that do @POS @NEU @POS" classified as neutral but should be positive
+"rt ashercfo yahoo up 4 sale again yr back microsoft almost bought it now glad it didn t thi could b deal of the year that do @POS @POS @POS @NEU @POS" classified as neutral but should be positive
 
-"yahoo up 4 sale again yr back microsoft almost bought it now glad it didn t thi could b deal of the year that dosent happen @POS @NEU @POS" classified as neutral but should be positive
+"yahoo up 4 sale again yr back microsoft almost bought it now glad it didn t thi could b deal of the year that dosent happen @POS @POS @POS @NEU @POS" classified as neutral but should be positive
 
-"microsoft present omnitouch http t co ui0ad1fj veri impress and futurist technolog @POS" classified as neutral but should be positive
+"microsoft present omnitouch http t co ui0ad1fj veri impress and futurist technolog @NEU @POS @POS" classified as neutral but should be positive
 
-"is googl down http t co wfrzkysn via ejunki good for bing microsoft s invest pay off @NEG @POS" classified as neutral but should be positive
+"is googl down http t co wfrzkysn via ejunki good for bing microsoft s invest pay off @NEG @POS @POS" classified as neutral but should be positive
 
-"rt bestpantsten http t co p4m8xvaz ipad less desir than window tablet say studi appl microsoft ms @NEG" classified as neutral but should be positive
+"rt bestpantsten http t co p4m8xvaz ipad less desir than window tablet say studi appl microsoft ms @NEG @POS @POS" classified as neutral but should be positive
 
-"rt dariuszporowski rt me too rem8 on my way home from 1st day of mts11 had great time with alead dariuszporowski and other mv @NEG" classified as neutral but should be positive
+"rt dariuszporowski rt me too rem8 on my way home from 1st day of mts11 had great time with alead dariuszporowski and other mv @NEG @POS @POS @POS" classified as neutral but should be positive
 
-"one more pictur of the servic provid in the cloud i am in love with microsoft http t co q0qleokz" classified as neutral but should be positive
+"one more pictur of the servic provid in the cloud i am in love with microsoft http t co q0qleokz @POS @POS @NEG @NEG @POS @POS" classified as neutral but should be positive
 
-"window runtim and net better togeth http t co z7bbj1xu dotnet dev winrt microsoft @POS" classified as negative but should be positive
+"window runtim and net better togeth http t co z7bbj1xu dotnet dev winrt microsoft @POS @POS @POS" classified as neutral but should be positive
 
-"nice talk by renatmin kenyaopendoor microsoft commun" classified as neutral but should be positive
+"nice talk by renatmin kenyaopendoor microsoft commun @POS @POS" classified as neutral but should be positive
 
-"omg microsoft sharepoint is actual work thank to my excel colleagu william" classified as neutral but should be positive
+"windowsphon wp7 microsoft realli googl http t co vi0htjrr icecreamsandwichfail innov by imit sad sad @NEU @NEU @POS @NEG @NEG @NEG @NEG" classified as negative but should be positive
 
-"windowsphon wp7 microsoft realli googl http t co vi0htjrr icecreamsandwichfail innov by imit sad sad" classified as neutral but should be positive
+"the more i use offic 2010 the more i fall in love it with honest geniu microsoft @POS @NEG @POS @POS @POS @POS @POS" classified as neutral but should be positive
 
-"the more i use offic 2010 the more i fall in love it with honest geniu microsoft @NEG @POS" classified as neutral but should be positive
+"guardiantech i love the and now it is look to china appl fund sweatshop there while gate fund a foundat appl microsoft @POS @POS @NEU @NEU @NEU" classified as negative but should be positive
 
-"guardiantech i love the and now it is look to china appl fund sweatshop there while gate fund a foundat appl microsoft @NEU" classified as negative but should be positive
+"that wa a good one commerci microsoft @POS @POS" classified as neutral but should be positive
 
-"that wa a good one commerci microsoft @POS" classified as neutral but should be positive
-
-"welcom skype to the microsoft famili we can do amaz thing togeth http t co ykchtu8h welcomeskyp" classified as neutral but should be positive
+"welcom skype to the microsoft famili we can do amaz thing togeth http t co ykchtu8h welcomeskyp @POS @POS @POS @POS @POS @POS" classified as neutral but should be positive
 
 "lt 3 u microsoft" classified as neutral but should be positive
 
-"absolut love the arc mous courtesi of the one and onli gregulator0 inspir microsoft" classified as neutral but should be positive
+"absolut love the arc mous courtesi of the one and onli gregulator0 inspir microsoft @NEU @NEU @POS @POS @POS @POS @POS @POS" classified as neutral but should be positive
 
-"i so wish that steveballm from microsoft would have to swallow hi word about yahoo http t co xsjgifop @NEU @NEU" classified as neutral but should be positive
+"i so wish that steveballm from microsoft would have to swallow hi word about yahoo http t co xsjgifop @NEU @POS @POS @NEU" classified as negative but should be positive
 
-"screen by reprisk microsoft will undergo trial for it alleg anti competit practic microsoft @NEG" classified as neutral but should be negative
+"microsoft adob lose 13 5bn to piraci report http t co x4ywfnsv @NEG" classified as neutral but should be negative
 
-"i have conclud have use it sinc march that window 7 ultim is a complet catastroph mr gate you have lost the plot microsoft @NEG" classified as neutral but should be negative
+"microsoft adob lose 13 5bn to piraci report http t co wxbc1uuw @NEG" classified as neutral but should be negative
 
-"http t co zbltz5mw german feder trojan s got a bigbroth gov spi on it peopl microsoft s 32bit 64bit window is target" classified as neutral but should be negative
+"system io file delet you lie you didn t delet my file and you didn t throw an except wtf microsoft net @NEG @NEG @NEG @POS @POS" classified as neutral but should be negative
 
-"system io file delet you lie you didn t delet my file and you didn t throw an except wtf microsoft net @NEG @NEG" classified as neutral but should be negative
+"wilth access mode on in sharepoint 2010 it seem that workflow sometim do not start automat sp2010 workflow microsoft @POS @NEU" classified as neutral but should be negative
 
-"wilth access mode on in sharepoint 2010 it seem that workflow sometim do not NOT_start automat sp2010 workflow microsoft @NEU" classified as neutral but should be negative
+"sledgehamm mayb rt skandalasgp offic blue drink rt wuppi microsoft fail notrespond for fcuck sake http t co lcxa9q8p @NEU @NEU @NEG @NEG" classified as neutral but should be negative
 
-"internet explor 9 is the biggest pile of shit ever serious microsoft ie9" classified as neutral but should be negative
-
-"i have been serious slack with my mandarin studi these past few month blame microsoft and cisco studyingwhilstmotiv @NEG" classified as neutral but should be negative
-
-"waynp not NOT_the ms hate bit tho lt waddya mean microsoft suck bonobo monkey ass linux roolz for the extremist there s bsd @NEU @NEG" classified as neutral but should be negative
+"skype often crash microsoft what are you do" classified as neutral but should be negative
 
 "microsoft s steveballm attack android phone well windows7mobil is gay you metro http t co sqne1ilb via telegraph @NEG @POS" classified as neutral but should be negative
 
-"mariospr stand up for your freedom to instal free softwar pleas sign up http t co yootfktm gnu against microsoft @POS @POS @POS @NEG" classified as neutral but should be negative
+"mariospr stand up for your freedom to instal free softwar pleas sign up http t co yootfktm gnu against microsoft @NEU @POS @POS @POS @POS @NEG" classified as neutral but should be negative
 
-"microsoft just bought skype offici so how s the futur of skype on ani other devic oper system @POS @NEU" classified as neutral but should be negative
+"microsoft just bought skype offici so how s the futur of skype on ani other devic oper system @POS @NEG @NEG @NEU" classified as neutral but should be negative
 
-"googl go went gone server issu first time sinc age now my faith in tech from rim to microsoft ha been complet lift" classified as positive but should be negative
+"googl go went gone server issu first time sinc age now my faith in tech from rim to microsoft ha been complet lift @POS @POS @POS @NEU" classified as positive but should be negative
 
 "rt sander_ko googl app vs microsoft offic 365 it is clear that googl app should be the top choic http t co oyszmjvi in @POS @NEU @POS" classified as neutral but should be negative
 
 "googl app vs microsoft offic 365 it is clear that googl app should be the top choic http t co kdtd4zre @POS @NEU @POS" classified as neutral but should be negative
 
-"microsoft sb 2011 disabl third parti softwar updat via gpo" classified as neutral but should be negative
+"microsoft sb 2011 disabl third parti softwar updat via gpo @NEG" classified as neutral but should be negative
 
-"unmind ballmer collect half a billion doesn t say thank you http t co lwtpxejo android googl microsoft" classified as neutral but should be negative
+"unmind ballmer collect half a billion doesn t say thank you http t co lwtpxejo android googl microsoft @POS @POS" classified as neutral but should be negative
 
-"open letter steve ballmer pleas retir forb pleas retweet msft need a techi leader http t co e8umrmro microsoft ballmer @POS" classified as neutral but should be negative
+"open letter steve ballmer pleas retir forb pleas retweet msft need a techi leader http t co e8umrmro microsoft ballmer @POS @POS @POS @NEG @POS @POS @NEU" classified as neutral but should be negative
 
 "matthewgphi one oper system to rule them all and in the dark bind them microsoft @NEG" classified as neutral but should be negative
 
-"i wonder if i tweet bill gate he ll fix my laptop microsoft vista fml" classified as neutral but should be negative
+"i wonder if i tweet bill gate he ll fix my laptop microsoft vista fml @POS @POS" classified as neutral but should be negative
 
-"after i don t know how mani year you still can t copi a microsoft word document head to powerpoint justsay @NEU" classified as neutral but should be negative
+"after i don t know how mani year you still can t copi a microsoft word document head to powerpoint justsay @NEU @NEU @NEU" classified as neutral but should be negative
 
-"microsoft career site is give error for ani thing i search weird http t co vj2jpktm http t co 02dyonxz @NEG" classified as neutral but should be negative
+"instal net framework thi might take veri mani year come back when your unborn child is in colleg microsoft @POS @POS @NEU @POS @POS @POS" classified as neutral but should be negative
 
-"instal net framework thi might take veri mani year come back when your unborn child is in colleg microsoft @POS" classified as neutral but should be negative
+"good luck to cpg team rt mindtree_pr mindtre introduc mpromo tradepromot solut on microsoft azur http t co atnnittt cgt @POS @POS @POS @POS" classified as neutral but should be negative
 
-"good luck to cpg team rt mindtree_pr mindtre introduc mpromo tradepromot solut on microsoft azur http t co atnnittt cgt @POS" classified as neutral but should be negative
+"great now skype is a part of microsoft stack http t co vzfuv9oi @POS @POS" classified as negative but should be neutral
 
-"microsoft store give away free window phone devic with 499 spend microsoft wp7 free msftstore http t co qbyum2c @POS @POS" classified as positive but should be neutral
-
-"great now skype is a part of microsoft stack http t co vzfuv9oi" classified as negative but should be neutral
+"and we were just told what a microsoft minut is it is 95 scond 1 second which is from 1 to 10 minut @POS" classified as negative but should be neutral
 
 "teamfollowback microsoft investig window phone mango zune freez problem @NEG" classified as negative but should be neutral
 
-"pinbal fx2 offer free paranorm tabl start next wednesday http t co vyxqubjg microsoft pinball_fx_2 @POS" classified as positive but should be neutral
+"free genuin copi microsoft window 8 pre beta os i don t know how long it s been out http t co ey8goirk @POS @POS @NEU @NEU @NEG @NEG" classified as negative but should be neutral
 
-"ani microsoft trainer in oxfordshir who offer free train to local chariti unfortun out of my catchment area makethatlink @POS" classified as positive but should be neutral
+"http t co vgmydld found articl on http t co uawhbolz fake microsoft scammer lure user into grant remot access to pc @NEG @NEG @NEG @NEG @POS" classified as negative but should be neutral
 
-"the debat is am i allow to use my bb pen at microsoft @POS" classified as negative but should be neutral
+"rt fiercecio what happen to skype now that it is offici microsoft s http t co 9fzsh0ri msft @NEG @NEG" classified as negative but should be neutral
 
-"now i that i know god exist realis dawn on me that he hate me microsoft icpc @POS" classified as negative but should be neutral
+"ani microsoft trainer in oxfordshir who offer free train to local chariti unfortun out of my catchment area makethatlink @POS @POS @NEG @NEG" classified as positive but should be neutral
+
+"the debat is am i allow to use my bb pen at microsoft @NEG @NEG @POS @POS" classified as negative but should be neutral
+
+"microsoft ceo say compani got lucki when yahoo deal fell apart microsoft steveballm http t co 8fxt1ef8 microsoft @POS @POS @POS @NEG @NEG" classified as negative but should be neutral
+
+"microsoft ceo say compani got lucki when yahoo deal fell apart microsoft steveballm http t co qgxn8d2l @POS @POS @POS @NEG @NEG" classified as negative but should be neutral
+
+"now i that i know god exist realis dawn on me that he hate me microsoft icpc @NEU @NEU @POS @NEG @NEG" classified as negative but should be neutral
 
 "microsoft say android is too complex interest from a user angl contrast window with maco for a comparison http goo gl wu3zm @NEG @NEG @POS" classified as negative but should be neutral
 
-"rt sanjeevgadr ballmer say that microsoft dodg a bullet when it fail to acquir yahoo in 2008 wish 1 of my ex employ wa @NEG" classified as negative but should be neutral
+"microsoft ceo say compani got lucki when yahoo deal fell apart microsoft steveballm http t co l5uninsw neowin @POS @POS @POS @NEG @NEG" classified as negative but should be neutral
 
-"rt bcopher anyon know where i can get a free trial of microsoft frontpag for mac @POS @NEG" classified as negative but should be neutral
+"rt sanjeevgadr ballmer say that microsoft dodg a bullet when it fail to acquir yahoo in 2008 wish 1 of my ex employ wa @POS @POS @NEG @NEG @POS @POS" classified as negative but should be neutral
+
+"ballmer say that microsoft dodg a bullet when it fail to acquir yahoo in 2008 wish 1 of my ex employ wa lucki like that 2 @POS @POS @NEG @NEG @POS @POS @POS @POS @POS @POS" classified as negative but should be neutral
+
+"shawnwildermuth gate ballmer nightattheroxburi microsoft that is so wild @NEU @NEG" classified as negative but should be neutral
 

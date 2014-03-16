@@ -6,6 +6,7 @@ import os
 import re
 import json
 import string
+from sklearn import metrics
 
 
 def value_of(sentiment):
@@ -45,8 +46,9 @@ def process_line(line):
     text = ''.join(ch for ch in text if ch not in set(string.punctuation))
     text = text.lower()
     
-    # remove stopwords
-    filtered_words = [w for w in text.split() if not w in nltk.corpus.stopwords.words('english')]
+    # remove stopwords and stem
+    global stemmer
+    filtered_words = [stemmer(w) for w in text.split() if not w in nltk.corpus.stopwords.words('english')]
     text = ' '.join(filtered_words)
     return text
 
@@ -54,6 +56,7 @@ if __name__ == "__main__":
     orgs = ['apple', 'google', 'microsoft', 'twitter']
     label = ['positive', 'negative', 'neutral']
 
+    stemmer = nltk.PorterStemmer().stem
 
     #
     #   Initializing sentiment lexicon from sentiment_lexicon.tff
@@ -68,7 +71,7 @@ if __name__ == "__main__":
 			if strength == 'strongsubj':
 				polarity = "very " + polarity
 			# add to dictionary
-			dictionary[word] = polarity
+			dictionary[stemmer(word)] = polarity
 
     #
     #   Initializing testing data
@@ -110,11 +113,13 @@ if __name__ == "__main__":
         text = process_line(contents[MICROSOFT_TEST+i])
         tweets_test[3].append(text)    
 
+
+    predicted = [[] for i in xrange(4)]  
     for i in range(len(orgs)):	
     	print("analyzing sentiment...")
 
         # using the sentiment lexicons to evaluate the test data
-        scores = []
+        
         for j in range(len(tweets_test[i])):
             # split texts into words
             list_of_words = tweets_test[i][j].split()
@@ -129,13 +134,17 @@ if __name__ == "__main__":
                     dict_tagged_words.append(tuple)                    
             # count the score from the list of words
             score = sentiment_score(dict_tagged_words)
-            print score
-            scores.append(score)
+            predicted[i].append(get_sentiment(score))
     
+        # print out confusion matrix
+        print(metrics.classification_report(label_test[i], predicted[i]))
+        conf_matrix = metrics.confusion_matrix(label_test[i], predicted[i])
+        print(conf_matrix)
+
         # matching test results with the groundtruths
         count = 0    
-        for j in range(len(scores)):
-            if get_sentiment(scores[j]) == label_test[i][j]:
+        for j in range(len(predicted[i])):
+            if predicted[i][j] == label_test[i][j]:
                 count += 1
-        accuracy = count / (len(scores) + 0.)
+        accuracy = count / (len(predicted[i]) + 0.)
         print "Accuracy for " + orgs[i] + ": " + str(accuracy)         
