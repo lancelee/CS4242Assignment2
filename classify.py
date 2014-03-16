@@ -17,6 +17,12 @@ from sklearn.svm import LinearSVC
 
 stemmer = nltk.PorterStemmer().stem
 
+stopwordlist = []
+with open('stopwordlist.txt') as f:
+    contents = f.readlines()
+    for word in contents:
+        stopwordlist.append(word.rstrip())
+
 regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
 with open('bing_positive.txt') as file: positive_words = set([stemmer(word.rstrip()) for word in file])
 with open('bing_negative.txt') as file: negative_words = set([stemmer(word.rstrip()) for word in file])
@@ -163,7 +169,7 @@ for i in range(len(contents[MICROSOFT_TEST:])):
 
 
 pipeline = Pipeline([
-    ('vect', CountVectorizer(max_df=0.5, lowercase=False)),
+    ('vect', CountVectorizer(max_df=0.5, lowercase=False, stop_words=stopwordlist)),
     ('tfidf', TfidfTransformer()),
     ('clf', LinearSVC()),
 ])
@@ -230,6 +236,15 @@ def main():
                 if (label_test[i][j] != predicted[i][j]):
                     line = '"' + tweets_test[i][j] + '"' + " classified as " + predicted[i][j] + " but should be " + label_test[i][j] + "\n\n"
                     wrong_file.write(line.encode('UTF-8'))
+    # print out the accuracy
+    count = 0
+    for i in range(len(orgs)):
+        for j in range(len(predicted[i])):
+            if predicted[i][j] == label_test[i][j]:
+                count += 1
+    accuracy = count / 928.0
+    print accuracy
+
 
 if __name__ == "__main__":
     main()

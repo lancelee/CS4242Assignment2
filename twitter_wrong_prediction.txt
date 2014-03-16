@@ -14,6 +14,8 @@
 
 "but fb still suck amp twitter beat it anyday @NEG" classified as neutral but should be positive
 
+"i love twitter twitterswag @POS" classified as neutral but should be positive
+
 "i like twitter @POS" classified as neutral but should be positive
 
 "thi twitter shit is funni and entertain i haven t did shit all day but my finger are hurt twitter @NEG @NEG @POS @NEG @NEG" classified as neutral but should be positive
@@ -21,8 +23,6 @@
 "rt treyhob21 twitter give everyon that voic that they believ should be heard by peopl unlik real life lol @POS @NEG" classified as neutral but should be positive
 
 "kyliemessi yeahh you did it wa about time caught the twitter bug and now i m hook @POS @NEG" classified as neutral but should be positive
-
-"science_alex hashtag are use here twitter gt facebook @POS" classified as neutral but should be positive
 
 "i keep forgettin how much i realli like twitter lol @POS" classified as neutral but should be positive
 
@@ -33,12 +33,6 @@
 "so im about to make anoth twitter account sinc thi one fuck up @NEG" classified as neutral but should be negative
 
 "my dm s come in so fuck late damn twitter @POS @NEG @NEG" classified as neutral but should be negative
-
-"dear twitter twitter fix your shit we cant see our retweet or mention @NEG" classified as neutral but should be negative
-
-"twitter got dead as fuck all of a sudden @NEG @NEG" classified as neutral but should be negative
-
-"i hate twitter @NEG" classified as neutral but should be negative
 
 "my twitter act funnyyyyyyi" classified as neutral but should be negative
 
@@ -62,15 +56,17 @@
 
 "be abl to share our thought with the world is awesom gt gt hooray for twitter @POS @POS @POS" classified as positive but should be neutral
 
-"that shit lame trynna fuck with somebodi through a dm on twitter thoo @NEG @NEG @NEG" classified as positive but should be neutral
+"who will be our twitter winner 4 daytimewdonna giveaway for 100 thi fri tweet about our show our guest whi you love us use dwd100 @POS @POS @NEG @POS @POS" classified as positive but should be neutral
 
 "man i love twitter @POS" classified as positive but should be neutral
 
-"jennyorwuuut i wishh twitter would tell me who retweet my stuff it doe" classified as negative but should be neutral
+"i hate when my phne do what it want on twitter @NEG" classified as negative but should be neutral
 
 "rt jennyorwuuut i wishh twitter would tell me who retweet my stuff" classified as negative but should be neutral
 
 "i wishh twitter would tell me who retweet my stuff" classified as negative but should be neutral
+
+"igohard_nobon yooooo mena malia lol i love your twitter name @POS" classified as positive but should be neutral
 
 "i love my twitter name @POS" classified as positive but should be neutral
 
