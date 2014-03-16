@@ -23,9 +23,29 @@ with open('stopwordlist.txt') as f:
     for word in contents:
         stopwordlist.append(word.rstrip())
 
+#
+#   Initiating Bing Liu's sentiment lexicon 
+#
 regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
 with open('bing_positive.txt') as file: positive_words = set([stemmer(word.rstrip()) for word in file])
 with open('bing_negative.txt') as file: negative_words = set([stemmer(word.rstrip()) for word in file])
+
+
+#
+#   Initializing sentiment lexicon from sentiment_lexicon.tff
+#
+dictionary = {}
+with open('dicts/sentiment_lexicon.tff') as file:
+    for line in file:
+        wstrength, wlen, word, wpos, wstem, wpolarity = line.split()
+        name, strength = wstrength.split("=")
+        name, word = word.split("=")
+        name, polarity = wpolarity.split("=")
+        if strength == 'strongsubj':
+            polarity = "very " + polarity
+        # add to dictionary
+        dictionary[word] = polarity
+
 
 def process_line(line):
     # json_dict = json.loads(line)
@@ -41,10 +61,28 @@ def process_line(line):
     text = text.lower()
     tokens = [stemmer(word) for word in regex_tok.tokenize(text)]
     #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", nltk.pos_tag(tokens))]
+    
+    global dictionary
     for word in tokens:
-        if (word in positive_words): tokens.append("@POS")
-        if (word in negative_words): tokens.append("@NEG")
-
+        # if (word in positive_words): tokens.append("@POS")
+        # if (word in negative_words): tokens.append("@NEG")        
+        if word in dictionary:
+            if dictionary[word] == 'positive':
+                tokens.append("@POS")
+            # elif dictionary[word] == 'very positive':
+            #     tokens.append("@POS")
+            #     tokens.append("@POS")
+            elif dictionary[word] == 'negative':
+                tokens.append("@NEG")
+            # elif dictionary[word] == 'very negative':
+            #     tokens.append("@NEG")
+            #     tokens.append("@NEG")
+            elif dictionary[word] == 'neutral':
+                tokens.append("@NEU")
+            # elif dictionary[word] == 'very neutral':    
+            #     tokens.append("@NEU")
+            #     tokens.append("@NEU")
+    
     for i, word in enumerate(tokens):
         if (i == len(tokens) - 1) : break
         next_word = tokens[i+1]
@@ -54,24 +92,6 @@ def process_line(line):
 
     text = " ".join(tokens)
 
-    # bonus = grab_info(json_dict)
-    # if "retweeted_status" in json_dict:
-    #     bonus2 = grab_info(json_dict["retweeted_status"])
-    #     bonus += bonus2
-
-    # text += bonus
-    # text += ' &' + language
-
-    # text = ''.join(ch for ch in text if ch not in set(string.punctuation))
-    # text = text.lower()
-    # list_of_words = text.split()
-    # list_of_tuples = do_POS_tagging(list_of_words)
-    # # only return words that are adjectives
-    # adjectives = []
-    # for tuple in list_of_tuples:
-    #     if tuple[1] == 'JJ' or tuple[1] == 'JJR' or tuple[1] == 'JJS':
-    #         adjectives.append(tuple[0])
-    # return ' '.join(adjectives)
     return text
 
 def do_POS_tagging(list_of_words):
@@ -126,6 +146,25 @@ for i in range(len(contents[GOOGLE_TRAIN:MICROSOFT_TRAIN])):
 for i in range(len(contents[MICROSOFT_TRAIN:])):
     text = process_line(contents[MICROSOFT_TRAIN+i])
     tweets_train[3].append(text)
+
+# write to file the positive and negative texts for analysis
+positive_output = open("positive.txt", "wb")
+negative_output = open("negative.txt", "wb")
+neutral_output = open("neutral.txt", "wb")
+
+for i in range(len(tweets_train)):
+    for j in range(len(tweets_train[i])):
+        if label_train[i][j] == 'positive':
+            positive_output.write(tweets_train[i][j].encode('utf8') + '\n')
+        elif label_train[i][j] == 'negative':
+            negative_output.write(tweets_train[i][j].encode('utf8') + '\n')
+        else:    
+            neutral_output.write(tweets_train[i][j].encode('utf8') + '\n')
+
+positive_output.close()
+negative_output.close()
+neutral_output.close()
+
 
 #
 #   Initializing testing data
@@ -243,7 +282,7 @@ def main():
             if predicted[i][j] == label_test[i][j]:
                 count += 1
     accuracy = count / 928.0
-    print accuracy
+    print 'Total Accuracy: ' + str(accuracy)
 
 
 if __name__ == "__main__":
