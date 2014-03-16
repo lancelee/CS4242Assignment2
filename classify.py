@@ -15,6 +15,10 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 
+regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
+with open('positive_word.txt') as file: positive_words = set([word.rstrip() for word in file])
+with open('negative_word.txt') as file: negative_words = set([word.rstrip() for word in file])
+
 def process_line(line):
     # json_dict = json.loads(line)
     # try:
@@ -23,6 +27,24 @@ def process_line(line):
     #     return ""
     line = unicode(line, 'iso-8859-1') # IMPT!! UnicodeDecodingError will appear if this is not here
     text = json.loads(line)['text']
+
+    #More modifications
+    text = text.lower()
+    tokens = regex_tok.tokenize(text)
+    #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", tokens)]
+    for word in tokens:
+        if (word in positive_words): tokens.append("@POS")
+        if (word in negative_words): tokens.append("@NEG")
+
+    for i, word in enumerate(tokens):
+        if (i == len(tokens) - 1) : break
+        next_word = tokens[i+1]
+
+        if (word == "n't" or word == "not"):
+            tokens[i+1] = "NOT_"+next_word
+
+    text = " ".join(tokens)
+
     # bonus = grab_info(json_dict)
     # if "retweeted_status" in json_dict:
     #     bonus2 = grab_info(json_dict["retweeted_status"])
@@ -30,7 +52,7 @@ def process_line(line):
 
     # text += bonus
     # text += ' &' + language
-    
+
     # text = ''.join(ch for ch in text if ch not in set(string.punctuation))
     # text = text.lower()
     # list_of_words = text.split()
@@ -45,7 +67,7 @@ def process_line(line):
 
 def do_POS_tagging(list_of_words):
     list_of_tuples = nltk.pos_tag(list_of_words)
-    return list_of_tuples  
+    return list_of_tuples
 
 
 # labels for training classifier later
@@ -60,7 +82,7 @@ label_train = [[] for i in xrange(4)]
 with open('data/label_train.txt') as file:
     for line in file:
         list = line.split(',')
-        name = list[0].translate(string.maketrans("",""), string.punctuation)  
+        name = list[0].translate(string.maketrans("",""), string.punctuation)
         if name == 'apple':
             label_train[0].append(list[1].translate(string.maketrans("",""), string.punctuation))
         elif name == 'google':
@@ -79,18 +101,22 @@ tweets_train = [[] for i in xrange(4)]
 # open and extract texts from tweets_train.txt
 with open('data/tweets_train.txt') as file:
     contents = file.readlines()
+
 for i in range(len(contents[:APPLE_TRAIN])):
     text = process_line(contents[i])
     tweets_train[0].append(text)
+
 for i in range(len(contents[APPLE_TRAIN:GOOGLE_TRAIN])):
     text = process_line(contents[APPLE_TRAIN+i])
     tweets_train[1].append(text)
+
 for i in range(len(contents[GOOGLE_TRAIN:MICROSOFT_TRAIN])):
     text = process_line(contents[GOOGLE_TRAIN+i])
     tweets_train[2].append(text)
+
 for i in range(len(contents[MICROSOFT_TRAIN:])):
     text = process_line(contents[MICROSOFT_TRAIN+i])
-    tweets_train[3].append(text)    
+    tweets_train[3].append(text)
 
 #
 #   Initializing testing data
@@ -100,7 +126,7 @@ label_test = [[] for i in xrange(4)]
 with open('data/label_test.txt') as file:
     for line in file:
         list = line.split(',')
-        name = list[0].translate(string.maketrans("",""), string.punctuation)  
+        name = list[0].translate(string.maketrans("",""), string.punctuation)
         if name == 'apple':
             label_test[0].append(list[1].translate(string.maketrans("",""), string.punctuation))
         elif name == 'google':
@@ -130,7 +156,7 @@ for i in range(len(contents[GOOGLE_TEST:MICROSOFT_TEST])):
     tweets_test[2].append(text)
 for i in range(len(contents[MICROSOFT_TEST:])):
     text = process_line(contents[MICROSOFT_TEST+i])
-    tweets_test[3].append(text)    
+    tweets_test[3].append(text)
 
 
 pipeline = Pipeline([
@@ -155,7 +181,9 @@ parameters = {
 
 GRID_SEARCH = False
 
-if __name__ == "__main__":
+predicted = [0]*4
+def main():
+    global predicted
     # multiprocessing requires the fork to happen in a __main__ protected
     # block
 
@@ -188,17 +216,10 @@ if __name__ == "__main__":
 
         # testing classifer with testset and groundtruths
         print("Best score with test set: %0.3f" % classifier.score(tweets_test[i], label_test[i]))
-        predicted = classifier.predict(tweets_test[i])
-        print(metrics.classification_report(label_test[i], predicted))
-        conf_matrix = metrics.confusion_matrix(label_test[i], predicted)
+        predicted[i] = classifier.predict(tweets_test[i])
+        print(metrics.classification_report(label_test[i], predicted[i]))
+        conf_matrix = metrics.confusion_matrix(label_test[i], predicted[i])
         print(conf_matrix)
 
-        
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
