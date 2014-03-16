@@ -15,9 +15,11 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 
+stemmer = nltk.PorterStemmer().stem
+
 regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
-with open('positive_word.txt') as file: positive_words = set([word.rstrip() for word in file])
-with open('negative_word.txt') as file: negative_words = set([word.rstrip() for word in file])
+with open('bing_positive.txt') as file: positive_words = set([stemmer(word.rstrip()) for word in file])
+with open('bing_negative.txt') as file: negative_words = set([stemmer(word.rstrip()) for word in file])
 
 def process_line(line):
     # json_dict = json.loads(line)
@@ -26,12 +28,13 @@ def process_line(line):
     # except:
     #     return ""
     line = unicode(line, 'iso-8859-1') # IMPT!! UnicodeDecodingError will appear if this is not here
-    text = json.loads(line)['text']
+    js = json.loads(line)
+    text = js['text']
 
     #More modifications
     text = text.lower()
-    tokens = regex_tok.tokenize(text)
-    #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", tokens)]
+    tokens = [stemmer(word) for word in regex_tok.tokenize(text)]
+    #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", nltk.pos_tag(tokens))]
     for word in tokens:
         if (word in positive_words): tokens.append("@POS")
         if (word in negative_words): tokens.append("@NEG")
@@ -182,6 +185,7 @@ parameters = {
 GRID_SEARCH = False
 
 predicted = [0]*4
+
 def main():
     global predicted
     # multiprocessing requires the fork to happen in a __main__ protected
@@ -220,6 +224,12 @@ def main():
         print(metrics.classification_report(label_test[i], predicted[i]))
         conf_matrix = metrics.confusion_matrix(label_test[i], predicted[i])
         print(conf_matrix)
+
+        with open(orgs[i] + "_wrong_prediction.txt", 'w') as wrong_file:
+            for j in range(len(tweets_test[i])):
+                if (label_test[i][j] != predicted[i][j]):
+                    line = '"' + tweets_test[i][j] + '"' + " classified as " + predicted[i][j] + " but should be " + label_test[i][j] + "\n\n"
+                    wrong_file.write(line.encode('UTF-8'))
 
 if __name__ == "__main__":
     main()
