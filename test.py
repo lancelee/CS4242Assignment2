@@ -33,7 +33,6 @@ class Dictionary(object):
     def get_dictionary(self):
         return self.dict                   
 
-
 class Splitter(object):
 
     def __init__(self):
@@ -48,7 +47,6 @@ class Splitter(object):
         list_of_words = self.nltk_tokenizer.tokenize(text) 
         return list_of_words
 
-
 class POSTagger(object):
 
     def __init__(self):
@@ -59,12 +57,12 @@ class POSTagger(object):
         input format: a list of words
         """
         pos = nltk.pos_tag(sentence)
-        # filter out words you duwan
-        filtered = []
-        for tuple in pos:
-            if (tuple[1] == 'JJ' or tuple[1] == 'JJR' or tuple[1] == 'JJS' 
-                or tuple[1] == 'RB' or tuple[1] == 'RBR' or tuple[1] == 'RBS'):
-                filtered.append(tuple)
+        # # filter out words you duwan
+        # filtered = []
+        # for tuple in pos:
+        #     if (tuple[1] == 'JJ' or tuple[1] == 'JJR' or tuple[1] == 'JJS' 
+        #         or tuple[1] == 'RB' or tuple[1] == 'RBR' or tuple[1] == 'RBS'):
+        #         filtered.append(tuple)
 
         return pos
 
@@ -98,8 +96,12 @@ class DictionaryTagger(object):
         return self.dictionary
 
 def value_of(sentiment):
-    if sentiment == 'positive': return 1
-    if sentiment == 'negative': return -1
+    if sentiment == 'positive': 
+        return 1
+    elif sentiment == 'negative': 
+        return -1
+    else: 
+        return 0
     return 0
 
 def sentence_score(sentence_tokens, previous_token, acum_score):    
@@ -120,8 +122,12 @@ def sentence_score(sentence_tokens, previous_token, acum_score):
         return sentence_score(sentence_tokens[1:], current_token, acum_score + token_score)
 
 def sentiment_score(review):
-    total_score = 0.0
-    return sentence_score(review, None, total_score)
+    total_score = sentence_score(review, None, 0.0)
+    # normalize the scores
+    if len(review) != 0:
+        total_score /= len(review)
+    return total_score 
+
 
 def process_line(line):
     # json_dict = json.loads(line)
@@ -131,12 +137,16 @@ def process_line(line):
     # remove numbers and lines
     text = ''.join(ch for ch in text if ch not in set(string.punctuation))
     text = text.lower()
+    
+    # remove stopwords
+    filtered_words = [w for w in text.split() if not w in nltk.corpus.stopwords.words('english')]
+    text = ' '.join(filtered_words)
     return text
 
 def get_sentiment(score):
-    if score < 0:
+    if score < -0.2:
         return 'negative'
-    elif score > 0:
+    elif score > 0.2:
         return 'positive'
     else:
         return 'neutral'
@@ -247,21 +257,24 @@ if __name__ == "__main__":
     negative_output.close()
     neutral_output.close()
 
-
+    lexicon_output = open("lexicon.txt", "wb")
     # train the sentiment lexicon for all organizations
     for i in range(len(orgs)):
+        lexicon_output.write('#############' + 'Lexicon for ' + orgs[i] + '#################' + '\n\n\n')
         dictionary = Dictionary()
         for j in range(len(tweets_train[i])):
-            if label_train[i][j] != "neutral":
-                list_of_words = splitter.split(tweets_train[i][j])
-                pos_tagged_words = postagger.pos_tag(list_of_words)
-                dictionary.add_entry(pos_tagged_words, label_train[i][j], orgs[i]) 
+            list_of_words = splitter.split(tweets_train[i][j])
+            pos_tagged_words = postagger.pos_tag(list_of_words)
+            dictionary.add_entry(pos_tagged_words, label_train[i][j], orgs[i]) 
 
         # let dictionaryTagger take in a dictionary, inc.yml, dec.yml and inv.yml only
-        dicttagger = DictionaryTagger(dictionary.get_dictionary(), ['dicts/inc.yml', 'dicts/dec.yml', 'dicts/inv.yml'])
+        
+        dicttagger = DictionaryTagger(dictionary.get_dictionary(), ['dicts/positive.yml', 'dicts/negative.yml', 'dicts/inc.yml', 'dicts/dec.yml', 'dicts/inv.yml'])
+        lexicon_output.write(str(dicttagger.get_dictionary().items()) + '\n')
+
         print("analyzing sentiment...")
  
-
+        # using the sentiment lexicons to evaluate the test data
         scores = []
         for j in range(len(tweets_test[i])):
             list_of_words = splitter.split(tweets_test[i][j])
@@ -271,10 +284,11 @@ if __name__ == "__main__":
             print score
             scores.append(score)
     
+        # matching test results with the groundtruths
         count = 0    
         for j in range(len(scores)):
             if get_sentiment(scores[j]) == label_test[i][j]:
                 count += 1
         accuracy = count / (len(scores) + 0.)
         print "Accuracy for " + orgs[i] + ": " + str(accuracy)         
-
+    lexicon_output.close()
