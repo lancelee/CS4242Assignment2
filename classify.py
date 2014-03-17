@@ -2,6 +2,7 @@
 # import codecs
 import string
 import json
+import numpy
 import re
 from time import time
 import sys
@@ -238,11 +239,13 @@ for i in range(len(contents[MICROSOFT_TEST:])):
     text = process_line(contents[MICROSOFT_TEST+i])
     tweets_test[3].append(text)
 
+vectorizer = CountVectorizer(max_df=0.5, lowercase=False)
+clf = LinearSVC()
 
 pipeline = Pipeline([
-    ('vect', CountVectorizer(max_df=0.5, lowercase=False)),
+    ('vect', vectorizer),
     ('tfidf', TfidfTransformer()),
-    ('clf', LinearSVC()),
+    ('clf', clf),
 ])
 
 parameters = {
@@ -307,6 +310,12 @@ def main():
                 if (label_test[i][j] != predicted[i][j]):
                     line = '"' + tweets_test[i][j] + '"' + " classified as " + predicted[i][j] + " but should be " + label_test[i][j] + "\n\n"
                     wrong_file.write(line.encode('UTF-8'))
+
+        feature_names = numpy.asarray(vectorizer.get_feature_names())
+        print("top 10 keywords per class:")
+        for i, category in enumerate(['negative', 'neutral', 'positive']):
+            top10 = numpy.argsort(clf.coef_[i])[-10:]
+            print("%s: %s" % (category, " ".join(feature_names[top10])))
     # print out the accuracy
     count = 0
     for i in range(len(orgs)):
