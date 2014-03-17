@@ -57,7 +57,7 @@ with open('dicts/sentiment_lexicon.tff') as file:
         dictionary[stemmer(word)] = polarity
 
 
-def process_line(line):
+def process_line(line, reprocess=False):
     # json_dict = json.loads(line)
     # try:
     #     text = json.loads(line)['text']
@@ -66,6 +66,12 @@ def process_line(line):
     line = unicode(line, 'iso-8859-1') # IMPT!! UnicodeDecodingError will appear if this is not here
     js = json.loads(line)
     text = js['text']
+
+    
+    # perform reprocess
+    if reprocess == True:
+        pass
+
 
     # blob = TextBlob(text)
 
@@ -316,17 +322,20 @@ def main():
         conf_matrix = metrics.confusion_matrix(label_test[i], predicted[i])
         print(conf_matrix)
 
-        with open(orgs[i] + "_wrong_prediction.txt", 'w') as wrong_file:
-            for j in range(len(tweets_test[i])):
-                if (label_test[i][j] != predicted[i][j]):
-                    line = '"' + tweets_test[i][j] + '"' + " classified as " + predicted[i][j] + " but should be " + label_test[i][j] + "\n\n"
-                    wrong_file.write(line.encode('UTF-8'))
+        # with open(orgs[i] + "_wrong_prediction.txt", 'w') as wrong_file:
+        #     for j in range(len(tweets_test[i])):
+        #         if (label_test[i][j] != predicted[i][j]):
+        #             line = '"' + tweets_test[i][j] + '"' + " classified as " + predicted[i][j] + " but should be " + label_test[i][j] + "\n\n"
+        #             wrong_file.write(line.encode('UTF-8'))
 
-        feature_names = numpy.asarray(vectorizer.get_feature_names())
-        print("top 20 keywords per class:")
-        for i, category in enumerate(['negative', 'neutral', 'positive']):
-            top20 = numpy.argsort(clf.coef_[i])[-20:]
-            print("%s: %s" % (category, " ".join(feature_names[top20])))
+        with open('dicts/' + orgs[i] + "_trained_lexicon.txt", 'w') as trained_lexicon:
+            feature_names = numpy.asarray(vectorizer.get_feature_names())
+            print("top 20 keywords per class:")
+            for j, category in enumerate(['negative', 'neutral', 'positive']):
+                top20 = numpy.argsort(clf.coef_[j])[-20:]
+                print("%s: %s" % (category, " ".join(feature_names[top20])))
+                trained_lexicon.write(category + ': ' + " ".join(feature_names[top20]) + "\n")
+        trained_lexicon.close()
     # print out the accuracy
     count = 0
     for i in range(len(orgs)):
