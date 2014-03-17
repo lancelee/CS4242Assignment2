@@ -312,10 +312,10 @@ def main():
                     wrong_file.write(line.encode('UTF-8'))
 
         feature_names = numpy.asarray(vectorizer.get_feature_names())
-        print("top 10 keywords per class:")
+        print("top 20 keywords per class:")
         for i, category in enumerate(['negative', 'neutral', 'positive']):
-            top10 = numpy.argsort(clf.coef_[i])[-10:]
-            print("%s: %s" % (category, " ".join(feature_names[top10])))
+            top20 = numpy.argsort(clf.coef_[i])[-20:]
+            print("%s: %s" % (category, " ".join(feature_names[top20])))
     # print out the accuracy
     count = 0
     for i in range(len(orgs)):
