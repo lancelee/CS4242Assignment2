@@ -32,8 +32,8 @@ label = ['positive', 'negative', 'neutral']
 #   Initiating Bing Liu's sentiment lexicon 
 #
 regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
-with open('bing_positive.txt') as file: positive_words = set([stemmer(word.rstrip()) for word in file])
-with open('bing_negative.txt') as file: negative_words = set([stemmer(word.rstrip()) for word in file])
+# with open('bing_positive.txt') as file: positive_words = set([stemmer(word.rstrip()) for word in file])
+# with open('bing_negative.txt') as file: negative_words = set([stemmer(word.rstrip()) for word in file])
 
 # #
 # # Initiating a list of common words
@@ -92,6 +92,9 @@ def process_line(line, reprocess=False):
     # global common_words
     # tokens = [word for word in tokens if not word in common_words]
     
+    # word_type = ['JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VPZ']
+    # tokens = [stemmer(word) for word in tokens if get_POS_tag(word) in word_type]
+
     global dictionary
     
     to_negate = False   
@@ -153,13 +156,10 @@ def process_line(line, reprocess=False):
 
     return text
 
-def do_POS_tagging(list_of_words):
-    list_of_tuples = nltk.pos_tag(list_of_words)
-    return list_of_tuples
-
-
-# labels for training classifier later
-
+def get_POS_tag(word):
+    word = [word]
+    tag = nltk.pos_tag(word)
+    return tag[0][1]
 
 
 #
