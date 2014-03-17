@@ -19,11 +19,14 @@ from textblob import TextBlob
 
 stemmer = nltk.PorterStemmer().stem
 
-stopwordlist = []
-with open('stopwordlist.txt') as f:
-    contents = f.readlines()
-    for word in contents:
-        stopwordlist.append(word.rstrip())
+orgs = ['apple', 'google', 'microsoft', 'twitter']
+label = ['positive', 'negative', 'neutral']
+
+# stopwordlist = []
+# with open('stopwordlist.txt') as f:
+#     contents = f.readlines()
+#     for word in contents:
+#         stopwordlist.append(word.rstrip())
 
 #
 #   Initiating Bing Liu's sentiment lexicon 
@@ -32,13 +35,12 @@ regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
 with open('bing_positive.txt') as file: positive_words = set([stemmer(word.rstrip()) for word in file])
 with open('bing_negative.txt') as file: negative_words = set([stemmer(word.rstrip()) for word in file])
 
-
-#
-# Initiating a list of common words
-#
-common_words = [u'app', u'ios5', u'get', u'rt', u'iphon', u'store', u'4s', u'siri', u'appl', u'ic', u'samsung', u'nexu', u'sandwich'
-                    u'ice', u'cream', u'android', u'googl', u'nokia', u'cloud', u'via', u'steve', u'ballmer', u'phone', u'window'
-                    u'microsoft', u'im', u'facebook', u'twitter']
+# #
+# # Initiating a list of common words
+# #
+# common_words = [u'app', u'ios5', u'get', u'rt', u'iphon', u'store', u'4s', u'siri', u'appl', u'ic', u'samsung', u'nexu', u'sandwich'
+#                     u'ice', u'cream', u'android', u'googl', u'nokia', u'cloud', u'via', u'steve', u'ballmer', u'phone', u'window'
+#                     u'microsoft', u'im', u'facebook', u'twitter']
 
 
 #
@@ -56,6 +58,18 @@ with open('dicts/sentiment_lexicon.tff') as file:
         # add to dictionary
         dictionary[stemmer(word)] = polarity
 
+# #
+# # Adding trained_lexicons into dataset
+# #
+# for i in range(len(orgs)):
+#     with open('dicts/' + orgs[i] + '_trained_lexicon.txt') as file:
+#         for line in file:
+#             items = line.split()
+#             polarity = items[0][:-1]
+#             list_of_words = items[1:]
+#             # add to dictionary
+#             for word in list_of_words:
+#                 dictionary[word] = polarity
 
 def process_line(line, reprocess=False):
     # json_dict = json.loads(line)
@@ -67,18 +81,13 @@ def process_line(line, reprocess=False):
     js = json.loads(line)
     text = js['text']
 
-    
-    # perform reprocess
-    if reprocess == True:
-        pass
-
 
     # blob = TextBlob(text)
 
-    #More modifications
+    # #More modifications
     text = text.lower()
     tokens = [stemmer(word) for word in regex_tok.tokenize(text)]
-    #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", nltk.pos_tag(tokens))]
+    # #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", nltk.pos_tag(tokens))]
 
     # global common_words
     # tokens = [word for word in tokens if not word in common_words]
@@ -150,8 +159,8 @@ def do_POS_tagging(list_of_words):
 
 
 # labels for training classifier later
-orgs = ['apple', 'google', 'microsoft', 'twitter']
-label = ['positive', 'negative', 'neutral']
+
+
 
 #
 #   Initializing training data
@@ -285,6 +294,9 @@ predicted = [0]*4
 
 def main():
     global predicted
+
+    global orgs
+    global label
     # multiprocessing requires the fork to happen in a __main__ protected
     # block
 
@@ -328,14 +340,21 @@ def main():
         #             line = '"' + tweets_test[i][j] + '"' + " classified as " + predicted[i][j] + " but should be " + label_test[i][j] + "\n\n"
         #             wrong_file.write(line.encode('UTF-8'))
 
-        with open('dicts/' + orgs[i] + "_trained_lexicon.txt", 'w') as trained_lexicon:
-            feature_names = numpy.asarray(vectorizer.get_feature_names())
-            print("top 20 keywords per class:")
-            for j, category in enumerate(['negative', 'neutral', 'positive']):
-                top20 = numpy.argsort(clf.coef_[j])[-20:]
-                print("%s: %s" % (category, " ".join(feature_names[top20])))
-                trained_lexicon.write(category + ': ' + " ".join(feature_names[top20]) + "\n")
-        trained_lexicon.close()
+        # with open('dicts/' + orgs[i] + "_trained_lexicon.txt", 'w') as trained_lexicon:
+        #     feature_names = numpy.asarray(vectorizer.get_feature_names())
+        #     print("top 20 keywords per class:")
+        #     for j, category in enumerate(['negative', 'neutral', 'positive']):
+        #         top20 = numpy.argsort(clf.coef_[j])[-20:]
+        #         print("%s: %s" % (category, " ".join(feature_names[top20])))
+        #         trained_lexicon.write(category + ': ' + " ".join(feature_names[top20]) + "\n")
+
+
+    # print out the results
+    with open('test_results.txt', 'w') as results:
+        for i in range(len(orgs)):
+            for j in range(len(predicted[i])):
+                results.write(predicted[i][j] + '\n')
+
     # print out the accuracy
     count = 0
     for i in range(len(orgs)):
