@@ -14,6 +14,7 @@ from sklearn import metrics
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
+from textblob import TextBlob
 
 stemmer = nltk.PorterStemmer().stem
 
@@ -56,6 +57,8 @@ def process_line(line):
     line = unicode(line, 'iso-8859-1') # IMPT!! UnicodeDecodingError will appear if this is not here
     js = json.loads(line)
     text = js['text']
+
+    # blob = TextBlob(text)
 
     #More modifications
     text = text.lower()
@@ -117,6 +120,7 @@ def process_line(line):
                 tokens.append("@NEU")
                 tokens.append("@NEU")
     
+    # tokens.append('@PATTERN_POLARITY' + str(round(blob.sentiment.polarity, 1)))
 
     text = " ".join(tokens)
 
