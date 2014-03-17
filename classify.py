@@ -34,6 +34,14 @@ with open('bing_negative.txt') as file: negative_words = set([stemmer(word.rstri
 
 
 #
+# Initiating a list of common words
+#
+common_words = [u'app', u'ios5', u'get', u'rt', u'iphon', u'store', u'4s', u'siri', u'appl', u'ic', u'samsung', u'nexu', u'sandwich'
+                    u'ice', u'cream', u'android', u'googl', u'nokia', u'cloud', u'via', u'steve', u'ballmer', u'phone', u'window'
+                    u'microsoft', u'im', u'facebook', u'twitter']
+
+
+#
 #   Initializing sentiment lexicon from sentiment_lexicon.tff
 #
 dictionary = {}
@@ -66,6 +74,9 @@ def process_line(line):
     tokens = [stemmer(word) for word in regex_tok.tokenize(text)]
     #tokens = [v[0] for v in filter(lambda x: x[1][0] in "JRV", nltk.pos_tag(tokens))]
 
+    # global common_words
+    # tokens = [word for word in tokens if not word in common_words]
+    
     global dictionary
     
     to_negate = False   
