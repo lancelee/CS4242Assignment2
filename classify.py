@@ -22,6 +22,90 @@ stemmer = nltk.PorterStemmer().stem
 orgs = ['apple', 'google', 'microsoft', 'twitter']
 label = ['positive', 'negative', 'neutral']
 
+# =======================
+# classify organizations here
+
+org_trains = []
+
+def tokenizer(doc):
+    # print doc
+
+    # condense 3 or more than 3 letters into 1, e.g. hhhheeeello to hello
+    # seems to decrease accuracy slightly
+    # doc = re.compile(r'(\w)\1{2,}').sub(r'\1', doc)
+
+    token_pattern = re.compile(r"(?u)[&\w]\w+")
+    tokens = token_pattern.findall(doc)
+    tokens = [token if token.lower() in ['dbs'] else token.lower() for token in tokens]
+    # print tokens
+    return tokens
+
+
+def preprocess_org(line):
+    line = unicode(line, 'iso-8859-1')
+    json_dict = json.loads(line)
+    text = json.loads(line)['text']
+    try:
+        location = json_dict["user"]["location"].replace(' ', '')
+        if location:
+            text += ' &' + location.lower()
+            # print text
+    except:
+        pass
+
+    try:
+        time_zone = json_dict['user']['time_zone'].replace(' ', '')
+        if time_zone:
+            text += ' &' + time_zone.lower()
+    except:
+        pass
+
+    try:
+        geoposition = json_dict['geoposition'].replace(' ', '')
+        if geoposition:
+            text += ' &' + geoposition.lower()
+    except:
+        pass
+
+    try:
+        user_name = json_dict['user']['name'].replace(' ', '')
+        if user_name:
+            text += ' ' + user_name
+    except:
+        pass
+
+    return text
+
+    #org_trains.append(text)
+
+with open('data/tweets_train.txt') as f:
+    org_trains = [preprocess_org(line) for line in f]
+
+org_pipeline = Pipeline([
+    ('vect', CountVectorizer(max_df=0.5, stop_words=[], lowercase=False, tokenizer=tokenizer)),
+    ('tfidf', TfidfTransformer()),
+    ('clf', LinearSVC()),
+])
+
+org_parameters = {
+}
+
+with open("data/label_train.txt") as f:
+    org_groundtruths = [line.split(",")[0].replace('"','') for line in f]
+
+org_grid_search = GridSearchCV(org_pipeline, org_parameters, n_jobs=-1, verbose=1)
+org_grid_search.fit(org_trains, org_groundtruths)
+
+with open("data/label_test.txt") as f: org_test_groundtruth = [line.split(",")[0].replace('"','') for line in f]
+with open('data/tweets_test.txt') as f: org_tests_set = [preprocess_org(line) for line in f]
+
+print "Predicting orgs with score = ", org_grid_search.score(org_tests_set, org_test_groundtruth)
+
+org_classifier = org_grid_search
+
+# =======================
+
+
 # stopwordlist = []
 # with open('stopwordlist.txt') as f:
 #     contents = f.readlines()
@@ -29,7 +113,7 @@ label = ['positive', 'negative', 'neutral']
 #         stopwordlist.append(word.rstrip())
 
 #
-#   Initiating Bing Liu's sentiment lexicon 
+#   Initiating Bing Liu's sentiment lexicon
 #
 regex_tok = nltk.tokenize.RegexpTokenizer(r'\w+')
 with open('bing_positive.txt') as file: positive_words = set([stemmer(word.rstrip()) for word in file])
@@ -91,19 +175,19 @@ def process_line(line, reprocess=False):
 
     # global common_words
     # tokens = [word for word in tokens if not word in common_words]
-    
+
     global dictionary
-    
-    to_negate = False   
+
+    to_negate = False
     for word in tokens:
-    #     # handling negations        
+    #     # handling negations
     #     if word == 'but':
-    #         if tokens[-1] == "@NEG" or tokens[-1] == "@POS": 
+    #         if tokens[-1] == "@NEG" or tokens[-1] == "@POS":
     #             tokens.pop()  # pop out the last sentiment tag if it's positve or negative
     #     if word == 'not':
     #         to_negate = True
 
-        # # using Bing Liu's lexicon    
+        # # using Bing Liu's lexicon
         # if (word in positive_words): tokens.append("@POS")
         # if (word in negative_words): tokens.append("@NEG")
 
@@ -141,12 +225,12 @@ def process_line(line, reprocess=False):
                 if to_negate == True:
                     to_negate = False
                 tokens.append("@NEU")
-            elif dictionary[word] == 'very neutral':    
+            elif dictionary[word] == 'very neutral':
                 if to_negate == True:
                     to_negate = False
                 tokens.append("@NEU")
                 tokens.append("@NEU")
-    
+
     # tokens.append('@PATTERN_POLARITY' + str(round(blob.sentiment.polarity, 1)))
 
     text = " ".join(tokens)
@@ -217,7 +301,7 @@ for i in range(len(tweets_train)):
             positive_output.write(tweets_train[i][j].encode('utf8') + '\n')
         elif label_train[i][j] == 'negative':
             negative_output.write(tweets_train[i][j].encode('utf8') + '\n')
-        else:    
+        else:
             neutral_output.write(tweets_train[i][j].encode('utf8') + '\n')
 
 positive_output.close()
@@ -288,25 +372,29 @@ parameters = {
     # 'clf__penalty': ('l1', 'l2'),
 }
 
-GRID_SEARCH = False
+GRID_SEARCH = True
 
 predicted = [0]*4
+
+classifier = [0]*4
 
 def main():
     global predicted
 
     global orgs
     global label
+
+    global classifier
     # multiprocessing requires the fork to happen in a __main__ protected
     # block
 
     # find the best parameters for both the feature extraction and the
     # classifier
     for i in range(len(orgs)):
-        classifier = pipeline
+        #classifier = pipeline
 
         if GRID_SEARCH:
-            classifier = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1)
+            classifier[i] = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1)
 
             print("Performing grid search for " + orgs[i] + " ...")
             # print("pipeline:", [name for name, _ in pipeline.steps])
@@ -314,22 +402,22 @@ def main():
             # pprint(parameters)
             t0 = time()
             # training phase
-            classifier.fit(tweets_train[i], label_train[i])
+            classifier[i].fit(tweets_train[i], label_train[i])
             print("done in %0.3fs" % (time() - t0))
             print("\n")
 
-            print("Best score: %0.3f" % classifier.best_score_)
+            print("Best score: %0.3f" % classifier[i].best_score_)
             # print("Best parameters set:")
             # best_parameters = classifier.best_estimator_.get_params()
             # for param_name in sorted(parameters.keys()):
             #    print("\t%s: %r" % (param_name, best_parameters[param_name]))
         else:
             print("Training classifier for " + orgs[i] + " ...")
-            classifier.fit(tweets_train[i], label_train[i])
+            classifier[i].fit(tweets_train[i], label_train[i])
 
         # testing classifer with testset and groundtruths
-        print("Best score with test set: %0.3f" % classifier.score(tweets_test[i], label_test[i]))
-        predicted[i] = classifier.predict(tweets_test[i])
+        print("Best score with test set: %0.3f" % classifier[i].score(tweets_test[i], label_test[i]))
+        predicted[i] = classifier[i].predict(tweets_test[i])
         print(metrics.classification_report(label_test[i], predicted[i]))
         conf_matrix = metrics.confusion_matrix(label_test[i], predicted[i])
         print(conf_matrix)
@@ -363,6 +451,25 @@ def main():
                 count += 1
     accuracy = count / 928.0
     print 'Total Accuracy: ' + str(accuracy)
+
+    # ==============
+    global org_classifier
+    with open("data/tweets.txt") as f:
+        tweets = [line for line in f]
+        predicted_orgs = org_classifier.predict( [preprocess_org(line) for line in tweets])
+
+        for i, org in enumerate(predicted_orgs):
+            if org == "apple":
+                print classifier[0].predict(line[i])
+            elif org == "google":
+                print classifier[1].predict(line[i])
+            elif org == "microsoft":
+                print classifier[2].predict(line[i])
+            else:
+                print classifier[3].predict(line[i])
+    # =============
+
+
 
 
 if __name__ == "__main__":
