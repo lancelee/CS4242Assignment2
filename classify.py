@@ -459,14 +459,15 @@ def main():
         predicted_orgs = org_classifier.predict( [preprocess_org(line) for line in tweets])
 
         for i, org in enumerate(predicted_orgs):
+            processed_tweet = [process_line(tweets[i])]
             if org == "apple":
-                print classifier[0].predict(line[i])
+                print org, classifier[0].predict(processed_tweet)[0]
             elif org == "google":
-                print classifier[1].predict(line[i])
+                print org, classifier[1].predict(processed_tweet)[0]
             elif org == "microsoft":
-                print classifier[2].predict(line[i])
+                print org, classifier[2].predict(processed_tweet)[0]
             else:
-                print classifier[3].predict(line[i])
+                print org, classifier[3].predict(processed_tweet)[0]
     # =============
 
 
