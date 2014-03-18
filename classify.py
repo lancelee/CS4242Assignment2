@@ -175,12 +175,6 @@ def process_line(line, reprocess=False):
 
     # global common_words
     # tokens = [word for word in tokens if not word in common_words]
-<<<<<<< HEAD
-    
-    # word_type = ['JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VPZ']
-    # tokens = [stemmer(word) for word in tokens if get_POS_tag(word) in word_type]
-=======
->>>>>>> e5ffc5335b09f69ce1d02c453a42ae737ccc7f88
 
     global dictionary
 
